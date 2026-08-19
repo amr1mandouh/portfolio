@@ -29,7 +29,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--bg);
+      background: radial-gradient(circle at 8% 12%, rgba(94,234,212,.11), transparent 28%), radial-gradient(circle at 92% 42%, rgba(167,139,250,.1), transparent 30%), var(--bg);
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       line-height: 1.6;
@@ -41,11 +41,12 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .22;
-      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 42px 42px;
+      opacity: .28;
+      background-image: linear-gradient(rgba(125,211,252,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,.045) 1px, transparent 1px), repeating-linear-gradient(135deg, transparent 0 96px, rgba(94,234,212,.025) 97px, transparent 98px);
+      background-size: 42px 42px, 42px 42px, auto;
       mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
+    body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .08; background-image: radial-gradient(rgba(94,234,212,.7) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(to bottom, black, transparent 72%); }
     ::selection { background: var(--cyan); color: var(--bg); }
     a { color: inherit; text-decoration: none; }
     .wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
@@ -196,8 +197,8 @@
     .social { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); font: 11px 'DM Mono', monospace; transition: color .2s ease, border-color .2s ease, background .2s ease; }
     .social:hover { color: var(--cyan); border-color: var(--cyan); background: rgba(94,234,212,.06); }
     .social svg { width: 16px; height: 16px; fill: currentColor; }
-    .social.whatsapp { cursor: default; color: var(--muted-2); }
-    .social.whatsapp:hover { color: var(--muted); border-color: var(--line); background: transparent; }
+    .social.whatsapp { color: #8bf3c7; }
+    .social.whatsapp:hover { color: #b8ffe2; border-color: #8bf3c7; background: rgba(94,234,212,.06); }
     @media (max-width: 800px) { .contact-panel { grid-template-columns: 1fr; gap: 34px; padding: 30px 24px; } }
 
     footer { padding: 30px 0 42px; color: var(--muted-2); font: 11px 'DM Mono', monospace; text-align: center; }
@@ -308,8 +309,24 @@
             <div class="project-stack"><span class="stack">Vite</span><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Tailwind</span><span class="stack">Supabase</span></div>
           </article>
           <article class="project">
-            <div><span class="project-kicker">AI productivity tool</span><h3>Redline</h3><p>An AI-powered resume optimizer and cover-letter generator built as a portfolio project for LLM evaluation platforms, with AI-assisted analysis and a rule-based fallback for dependable behavior.</p></div>
-            <div class="project-stack"><span class="stack">Vite</span><span class="stack">React</span><span class="stack">Tailwind</span><span class="stack">AI workflows</span></div>
+            <div><span class="project-kicker">Coastal research workspace</span><h3>TideGlyph</h3><p>A field notebook board for coastal research teams to track observations, filter survey records, mark logged work, and keep an active survey in view.</p></div>
+            <div class="project-stack"><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Vite</span><span class="stack">Local data</span></div>
+          </article>
+          <article class="project">
+            <div><span class="project-kicker">Museum collection system</span><h3>FossilNote</h3><p>A cataloging workspace for natural history museums, designed around specimen tracking, collection filters, priorities, and clear status updates.</p></div>
+            <div class="project-stack"><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Filtering</span><span class="stack">QA</span></div>
+          </article>
+          <article class="project">
+            <div><span class="project-kicker">Theatre production board</span><h3>QuietCue</h3><p>A focused show board for small theatre productions to organize cues, mark calls, filter by cue type or priority, and keep a production batch selected.</p></div>
+            <div class="project-stack"><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Accessible UI</span><span class="stack">Tests</span></div>
+          </article>
+          <article class="project">
+            <div><span class="project-kicker">Community radio workflow</span><h3>RadioFable</h3><p>A warm rundown board for radio teams to organize episode segments, track what has aired, and manage show content by format and priority.</p></div>
+            <div class="project-stack"><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Workflow UI</span><span class="stack">Vite</span></div>
+          </article>
+          <article class="project">
+            <div><span class="project-kicker">Bakery operations tool</span><h3>CrumbLedger</h3><p>A batch board for sourdough bakeries to track bakes, mark loaves as finished, filter by kind or priority, and keep production details organized.</p></div>
+            <div class="project-stack"><span class="stack">React</span><span class="stack">TypeScript</span><span class="stack">Operations</span><span class="stack">Local storage</span></div>
           </article>
         </div>
       </div>
@@ -376,6 +393,16 @@
   </main>
 
   <footer><div class="wrap footer-line"><span>© <span id="year"></span> Amr Mandouh</span><span>Built with care · Cairo, Egypt</span></div></footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const whatsappButton = document.querySelector('.social.whatsapp');
+    if (whatsappButton) {
+      whatsappButton.setAttribute('role', 'link');
+      whatsappButton.setAttribute('tabindex', '0');
+      const openWhatsApp = () => window.open('https://wa.me/201551303080', '_blank', 'noopener');
+      whatsappButton.addEventListener('click', openWhatsApp);
+      whatsappButton.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openWhatsApp(); } });
+    }
+  </script>
 </body>
 </html>
